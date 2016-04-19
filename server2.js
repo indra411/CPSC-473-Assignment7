@@ -1,17 +1,11 @@
-var require, response;
+var require;
 var express = require("express"),
 	http = require("http"),
 	// import the mongooese library
 	mongoose = require("mongoose"),
-	open = require("open"),
-	//spawn = require('child_process').spawn,
 	app = express();
 
 var bodyParser = require("body-parser");
-
-var urlencodedParser = bodyParser.urlencoded({
-	extended: false
-});
 
 app.use(express.static("public"));
 
@@ -83,19 +77,9 @@ app.get("/click/:title", function (req, res) {
 				}
 
 			});
-			console.log("DEBUG - executed here ...");
-			open('"'+theLink.link+'"');
 
-			res.writeHead(301,
-				{Location: "'"+theLink.link+"'"}
-			);
-			res.end;
-			/*, function (err) {
-				if (err) {
-					console.log(err);
-				}
-			});
-			*/
+			// Redirect to the URL
+			res.redirect(theLink.link);
 		}
 	});
 });
